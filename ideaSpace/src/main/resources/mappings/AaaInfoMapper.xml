@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.mapper.AaaInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.entity.AaaInfo" >
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="course" property="course" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.demo.entity.AaaInfo" >
+    insert into aaa_info (name, course, score
+      )
+    values (#{name,jdbcType=VARCHAR}, #{course,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.entity.AaaInfo" >
+    insert into aaa_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="course != null" >
+        course,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="course != null" >
+        #{course,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectByName" resultType="com.example.demo.entity.AaaInfo" parameterType="String">
+    select * from aaa_info
+    where name = #{name,jdbcType=VARCHAR}
+  </select>
+
+  <update id="updateByname" parameterType="com.example.demo.entity.AaaInfo">
+        UPDATE aaa_info
+            SET name = #{name,jdbcType=VARCHAR},
+                course = #{course,jdbcType=VARCHAR},
+                score =  #{score,jdbcType=INTEGER}
+          where name = #{name,jdbcType=VARCHAR}
+</update>
+
+</mapper>
